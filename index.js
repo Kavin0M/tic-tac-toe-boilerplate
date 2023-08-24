@@ -1,6 +1,6 @@
 const box = document.querySelectorAll(".box")
 const button = document.getElementById("button")
-const l = ["X","O"]
+const l = "X"
 var turn = l[0]
 var board = [[0,1,2],[4,5,6],[7,8,9]]
 var time = 0
@@ -18,7 +18,7 @@ box.forEach((item)=>{
             board[2][a-7] = turn
         }
     })
-    item.addEventListener("click",()=>addXO(item),{ once: true })
+    item.addEventListener("click",()=>addXO(item),{once: true })
     item.addEventListener("click",()=>winCon(board))
     item.addEventListener("click",()=>{
         if (time==9){
@@ -30,47 +30,18 @@ box.forEach((item)=>{
 
 function addXO(item){
     item.innerHTML = `<h1>${turn}<h1>`
-    if (turn == l[0]){
-        turn = l[1]
-    }
-    else{
-        turn = l[0]
-    }
+    turn = turn == "X" ? "O":"X"
     time ++
     console.log(time)
 }
 
 function winCon(arr){
-    if ((arr[0][0]=="X" && arr[0][1]=="X" && arr[0][2]=="X") || (arr[0][0]=="O" && arr[0][1]=="O" && arr[0][2]=="O")){
-        document.getElementById("message").innerText = `"${arr[0][0]}" Won the game !`
+    if ((arr[0][0]+arr[0][1]+arr[0][2]=="XXX") || (arr[1][0]+arr[1][1]+arr[1][2]=="XXX") ||(arr[2][0]+arr[2][1]+arr[2][2]=="XXX") || (arr[0][0]+arr[1][0]+arr[2][0]=="XXX") || (arr[0][1]+arr[1][1]+arr[2][1]=="XXX") || (arr[0][2]+arr[1][2]+arr[2][2]=="XXX") || (arr[0][0]+arr[1][1]+arr[2][2]=="XXX") || (arr[0][2]+arr[1][1]+arr[2][0]=="XXX")){
+        document.getElementById("message").innerText = `"X" Won the game !`
         document.getElementById("result").style.visibility = "visible"
     }
-    else if ((arr[1][0]=="X" && arr[1][1]=="X" && arr[1][2]=="X") || (arr[1][0]=="O" && arr[1][1]=="O" && arr[1][2]=="O")){
-        document.getElementById("message").innerText = `"${arr[1][0]}" Won the game !`
-        document.getElementById("result").style.visibility = "visible"
-    }
-    else if ((arr[2][0]=="X" && arr[2][1]=="X" && arr[2][2]=="X") || (arr[2][0]=="O" && arr[2][1]=="O" && arr[2][2]=="O")){
-        document.getElementById("message").innerText = `"${arr[2][0]}" Won the game !`
-        document.getElementById("result").style.visibility = "visible"
-    }
-    else if ((arr[0][0]=="X" && arr[1][0]=="X" && arr[2][0]=="X") || (arr[0][0]=="O" && arr[1][0]=="O" && arr[2][0]=="O")){
-        document.getElementById("message").innerText = `"${arr[0][0]}" Won the game !`
-        document.getElementById("result").style.visibility = "visible"
-    }
-    else if ((arr[0][1]=="X" && arr[1][1]=="X" && arr[2][1]=="X") || (arr[0][1]=="O" && arr[1][1]=="O" && arr[2][1]=="O")){
-        document.getElementById("message").innerText = `"${arr[0][1]}" Won the game !`
-        document.getElementById("result").style.visibility = "visible"
-    }
-    else if ((arr[0][2]=="X" && arr[1][2]=="X" && arr[2][2]=="X") || (arr[0][2]=="O" && arr[1][2]=="O" && arr[2][2]=="O")){
-        document.getElementById("message").innerText = `"${arr[0][2]}" Won the game !`
-        document.getElementById("result").style.visibility = "visible"
-    }
-    else if ((arr[0][0]=="X" && arr[1][1]=="X" && arr[2][2]=="X") || (arr[0][0]=="O" && arr[1][1]=="O" && arr[2][2]=="O")){
-        document.getElementById("message").innerText = `"${arr[0][0]}" Won the game !`
-        document.getElementById("result").style.visibility = "visible"
-    }
-    else if ((arr[0][2]=="X" && arr[1][1]=="X" && arr[2][0]=="X") || (arr[0][2]=="O" && arr[1][1]=="O" && arr[2][0]=="O")){
-        document.getElementById("message").innerText = `"${arr[0][2]}" Won the game !`
+    else if ((arr[0][2]+arr[1][1]+arr[2][0]=="OOO") || (arr[0][0]+arr[1][1]+arr[2][2]=="OOO") || (arr[0][2]+arr[1][2]+arr[2][2]=="OOO") || (arr[0][1]+arr[1][1]+arr[2][1]=="OOO") || (arr[0][0]+arr[1][0]+arr[2][0]=="OOO") || (arr[2][0]+arr[2][1]+arr[2][2]=="OOO") || (arr[1][0]+arr[1][1]+arr[1][2]=="OOO") || (arr[0][0]+arr[0][1]+arr[0][2]=="OOO")){
+        document.getElementById("message").innerText = `"O" Won the game !`
         document.getElementById("result").style.visibility = "visible"
     }
 }
